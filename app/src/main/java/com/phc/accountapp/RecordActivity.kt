@@ -20,16 +20,16 @@ class RecordActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_record)
         //1.查找控件
-        tabLayout = findViewById<TabLayout>(R.id.record_tabs)
-        viewPager = findViewById<ViewPager>(R.id.record_vp)
+        tabLayout = findViewById(R.id.record_tabs)
+        viewPager = findViewById(R.id.record_vp)
         //2.设置ViewPager加载页面
         initPager()
     }
 
     private fun initPager() {
-//        初始化ViewPager页面的集合
+        // 初始化ViewPager页面的集合
         val fragmentList: MutableList<Fragment> = ArrayList()
-        //        创建收入和支出页面，放置在Fragment当中
+        // 创建收入和支出页面，放置在Fragment当中
         val outFrag = OutcomeFragment() //支出
         val inFrag = IncomeFragment() //收入
         fragmentList.add(outFrag)
@@ -37,7 +37,7 @@ class RecordActivity : AppCompatActivity() {
 
 //        创建适配器
         val pagerAdapter = RecordPagerAdapter(supportFragmentManager, fragmentList)
-        //        设置适配器
+        // 设置适配器
         viewPager!!.adapter = pagerAdapter
         //将TabLayout和ViwePager进行关联
         tabLayout!!.setupWithViewPager(viewPager)
