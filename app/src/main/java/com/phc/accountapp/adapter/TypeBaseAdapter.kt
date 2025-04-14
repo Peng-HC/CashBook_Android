@@ -12,7 +12,7 @@ import com.phc.accountapp.db.TypeBean
 
 class TypeBaseAdapter(val context: Context, private val mData: List<TypeBean>) : BaseAdapter() {
     // 选中的位置
-    private var selectPos = - 1
+    private var selectPos = -1
     override fun getCount(): Int {
         return mData.size
     }
@@ -23,6 +23,14 @@ class TypeBaseAdapter(val context: Context, private val mData: List<TypeBean>) :
 
     override fun getItemId(position: Int): Long {
         return position.toLong()
+    }
+
+    fun setSelectedPos(pos: Int) {
+        selectPos = pos
+    }
+
+    fun getSelectedPos(): Int {
+        return selectPos
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {

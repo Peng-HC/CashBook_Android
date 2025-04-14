@@ -4,11 +4,15 @@ import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.DatePicker
 import android.widget.EditText
 import com.phc.accountapp.R
 
+/**
+ * 在记录页面弹出时间对话框
+ */
 class SelectTimeDialog(private val context: Context) : Dialog(context), View.OnClickListener {
 
     private lateinit var cancelBtn: Button
@@ -36,9 +40,10 @@ class SelectTimeDialog(private val context: Context) : Dialog(context), View.OnC
         hourEt = findViewById(R.id.dialog_time_et_hour)
         minEt = findViewById(R.id.dialog_time_et_minute)
 
-
         cancelBtn.setOnClickListener(this)
         ensureBtn.setOnClickListener(this)
+
+        hideDatePickerHeader()
 
     }
 
@@ -81,5 +86,22 @@ class SelectTimeDialog(private val context: Context) : Dialog(context), View.OnC
         if (::onEnsureListener.isInitialized) {
             onEnsureListener.onEnsure(timeFormat, year, month, day)
         }
+    }
+
+    //隐藏DatePicker头布局
+    private fun hideDatePickerHeader() {
+        if (::datePicker.isInitialized.not()) {
+            return
+        }
+        val rootView = datePicker.getChildAt(0) as? ViewGroup ?: return
+        val headerView = rootView.getChildAt(0) as? View ?: return
+        // 6.0+版本
+
+        // 6.0+
+        val headerId = getContext().resources.getIdentifier("date_picker_header", "id", "android")
+        if (headerId == headerView.id) {
+            headerView.visibility = View.GONE
+        }
+
     }
 }

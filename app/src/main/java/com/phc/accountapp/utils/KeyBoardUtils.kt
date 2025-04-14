@@ -60,7 +60,9 @@ class KeyBoardUtils(
                         onEnsureListener.onEnSure()
                     }
 
+                    // 其他按键
                     else -> {
+                        editable.insert(startPos, primaryCode.toChar().toString());
                     }
                 }
                 true
